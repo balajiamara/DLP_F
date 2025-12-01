@@ -523,3 +523,57 @@
     font-size: 1.5rem;
   }
 }
+
+
+
+/* ===== AI Day-wise Plan ===== */
+
+.ai-plan-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.ai-day-card {
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(174, 198, 247, 0.18),
+    rgba(255, 255, 255, 0.96)
+  );
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.25);
+}
+
+.ai-day-card:hover {
+  border-color: #aec6f7;
+  box-shadow: 0 6px 16px rgba(148, 163, 184, 0.4);
+  transform: translateY(-1px);
+}
+
+.ai-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.ai-day-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(195, 177, 225, 0.85);
+  color: #1f2933;
+}
+
+.ai-day-content {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.4;
+}
