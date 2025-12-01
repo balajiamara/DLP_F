@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/login.jsx";
-import Register from './pages/register.jsx';
+import Login from "./pages/Login.jsx";
+import Register from './pages/Register.jsx';
 import Goal from './pages/Goal.jsx';
 import DailyPlan from './pages/DailyPlan.jsx';
-import Dashboard from './pages/dashboard.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 
 
