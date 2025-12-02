@@ -1,275 +1,5 @@
-// // src/pages/Dashboard.jsx
-// import React from "react";
-// import "./Dashboard.css";
+// //CODE WITH BEAUTIFUL UI
 
-// export default function Dashboard() {
-//   // Dummy data for now – later replace with real API data
-//   const user = {
-//     name: "Balaji",
-//     email: "balaji@example.com",
-//   };
-
-//   const todaysPlan = [
-//     {
-//       id: 1,
-//       goalTitle: "Python Basics",
-//       topics: ["Lists & Tuples", "Sets basics", "If/Else revision"],
-//       plannedHours: 2,
-//       completed: 1, // topics completed
-//       totalTopics: 3,
-//     },
-//     {
-//       id: 2,
-//       goalTitle: "SQL Fundamentals",
-//       topics: ["SELECT & WHERE", "ORDER BY & LIMIT"],
-//       plannedHours: 1.5,
-//       completed: 0,
-//       totalTopics: 2,
-//     },
-//   ];
-
-//   const goals = [
-//     {
-//       id: 1,
-//       title: "Complete Python Basics",
-//       deadline: "2025-12-05",
-//       status: "In Progress",
-//       progress: 60,
-//     },
-//     {
-//       id: 2,
-//       title: "Master SQL Queries",
-//       deadline: "2025-12-10",
-//       status: "In Progress",
-//       progress: 40,
-//     },
-//     {
-//       id: 3,
-//       title: "React Fundamentals",
-//       deadline: "2025-12-20",
-//       status: "Not Started",
-//       progress: 10,
-//     },
-//   ];
-
-//   const weeklyProgress = {
-//     hoursPlanned: 10,
-//     hoursCompleted: 6,
-//   };
-
-//   const weeklyPercent = Math.round(
-//     (weeklyProgress.hoursCompleted / weeklyProgress.hoursPlanned) * 100
-//   );
-
-//   const aiHint =
-//     "You are close to finishing 'Python Basics'. Tomorrow, focus on practice problems for loops and functions.";
-
-//   const handleLogout = () => {
-//     console.log("Logout clicked");
-//     // Later: clear auth & redirect
-//   };
-
-//   const today = new Date().toLocaleDateString("en-IN", {
-//     weekday: "long",
-//     day: "numeric",
-//     month: "short",
-//     year: "numeric",
-//   });
-
-//   return (
-//     <div className="dash-root">
-//       <div className="dash-container">
-//         {/* ===== Top Bar ===== */}
-//         <header className="dash-header">
-//           <div className="dash-greeting">
-//             <p className="dash-greeting-label">Welcome back,</p>
-//             <h1 className="dash-greeting-title">
-//               {user.name} 👋
-//             </h1>
-//             <p className="dash-greeting-subtitle">
-//               Today is <span className="pill pill-date">{today}</span>.  
-//               Stay consistent and your goals will follow.
-//             </p>
-//           </div>
-
-//           <div className="dash-user-card">
-//             <div className="dash-user-info">
-//               <div className="dash-avatar">
-//                 {user.name.charAt(0).toUpperCase()}
-//               </div>
-//               <div>
-//                 <p className="dash-user-name">{user.name}</p>
-//                 <p className="dash-user-email">{user.email}</p>
-//               </div>
-//             </div>
-//             <button className="dash-logout-btn" onClick={handleLogout}>
-//               Logout
-//             </button>
-//           </div>
-//         </header>
-
-//         {/* ===== Main Grid ===== */}
-//         <main className="dash-main">
-//           <section className="dash-card dash-today">
-//             <div className="dash-card-header">
-//               <h2>Today&apos;s Plan</h2>
-//               <button className="ghost-btn">+ Add Plan</button>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Focus on what matters most today. Mark topics as you complete them.
-//             </p>
-
-//             <div className="today-list">
-//               {todaysPlan.map((plan) => {
-//                 const percent = Math.round(
-//                   (plan.completed / plan.totalTopics) * 100
-//                 );
-//                 return (
-//                   <div key={plan.id} className="today-item">
-//                     <div className="today-item-header">
-//                       <div className="today-item-goal">
-//                         <span className="today-goal-pill">
-//                           {plan.goalTitle}
-//                         </span>
-//                         <span className="today-hours">
-//                           {plan.plannedHours} hrs
-//                         </span>
-//                       </div>
-//                       <span className="today-progress-label">
-//                         {plan.completed}/{plan.totalTopics} done
-//                       </span>
-//                     </div>
-
-//                     <div className="today-topics">
-//                       {plan.topics.map((topic, idx) => (
-//                         <div key={idx} className="topic-pill">
-//                           <span className="topic-dot" />
-//                           <span>{topic}</span>
-//                         </div>
-//                       ))}
-//                     </div>
-
-//                     <div className="today-progress-bar">
-//                       <div
-//                         className="today-progress-fill"
-//                         style={{ width: `${percent}%` }}
-//                       />
-//                     </div>
-//                   </div>
-//                 );
-//               })}
-//             </div>
-//           </section>
-
-//           <section className="dash-card dash-goals">
-//             <div className="dash-card-header">
-//               <h2>Goals & Deadlines</h2>
-//               <button className="ghost-btn">Manage Goals</button>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Keep an eye on your upcoming deadlines and overall progress.
-//             </p>
-
-//             <div className="goals-list">
-//               {goals.map((goal) => (
-//                 <div key={goal.id} className="goal-item">
-//                   <div className="goal-main">
-//                     <p className="goal-title">{goal.title}</p>
-//                     <p className="goal-deadline">
-//                       Due: <span>{goal.deadline}</span>
-//                     </p>
-//                   </div>
-//                   <div className="goal-meta">
-//                     <span
-//                       className={`status-pill status-${goal.status
-//                         .toLowerCase()
-//                         .replace(" ", "-")}`}
-//                     >
-//                       {goal.status}
-//                     </span>
-//                     <div className="goal-progress">
-//                       <div
-//                         className="goal-progress-fill"
-//                         style={{ width: `${goal.progress}%` }}
-//                       />
-//                     </div>
-//                     <span className="goal-progress-text">
-//                       {goal.progress}%
-//                     </span>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </section>
-//         </main>
-
-//         {/* ===== Bottom Row ===== */}
-//         <section className="dash-bottom">
-//           <div className="dash-card dash-progress">
-//             <div className="dash-card-header">
-//               <h2>Weekly Progress</h2>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               You&apos;re building consistency. Keep your streak alive!
-//             </p>
-
-//             <div className="progress-summary">
-//               <div className="progress-numbers">
-//                 <div>
-//                   <p className="progress-label">Planned</p>
-//                   <p className="progress-value">
-//                     {weeklyProgress.hoursPlanned} hrs
-//                   </p>
-//                 </div>
-//                 <div>
-//                   <p className="progress-label">Completed</p>
-//                   <p className="progress-value">
-//                     {weeklyProgress.hoursCompleted} hrs
-//                   </p>
-//                 </div>
-//                 <div>
-//                   <p className="progress-label">Completion</p>
-//                   <p className="progress-value">{weeklyPercent}%</p>
-//                 </div>
-//               </div>
-
-//               <div className="progress-bar">
-//                 <div
-//                   className="progress-bar-fill"
-//                   style={{ width: `${weeklyPercent}%` }}
-//                 />
-//               </div>
-//             </div>
-//           </div>
-
-//           <div className="dash-card dash-ai">
-//             <div className="dash-card-header">
-//               <h2>AI Study Suggestions</h2>
-//               <span className="pill pill-ai">Smart Tips</span>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Powered by your goals and recent activity.
-//             </p>
-
-//             <p className="ai-text">{aiHint}</p>
-
-//             <div className="ai-actions">
-//               <button className="primary-btn">Open AI Planner</button>
-//               <button className="ghost-btn subtle">Refresh Suggestion</button>
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-// PRODUCTION
-
-// // src/pages/Dashboard.jsx
 // import React, { useEffect, useState, useMemo } from "react";
 // import { useNavigate } from "react-router-dom";
 // import "./Dashboard.css";
@@ -288,508 +18,8 @@
 //   const [dailyPlans, setDailyPlans] = useState([]);
 //   const [loading, setLoading] = useState(true);
 //   const [aiLoading, setAiLoading] = useState(false);
-//   const [aiHint, setAiHint] = useState(
-//     "Click the button to generate an AI-powered study suggestion."
-//   );
-//   const [error, setError] = useState("");
-
-//   // ---------------------------
-//   // Load user & fetch data
-//   // ---------------------------
-//   useEffect(() => {
-//     // Load stored user (if you saved it in Login)
-//     const storedUser = localStorage.getItem("userInfo");
-//     if (storedUser) {
-//       try {
-//         setUser(JSON.parse(storedUser));
-//       } catch {
-//         // ignore
-//       }
-//     }
-
-//     const fetchData = async () => {
-//       try {
-//         setLoading(true);
-//         setError("");
-
-//         const [goalsRes, plansRes] = await Promise.all([
-//           fetch(`${API_BASE}/goals/`, {
-//             credentials: "include",
-//             headers: {
-//               "Content-Type": "application/json",
-//               // Authorization: `Token ${localStorage.getItem("authToken")}`
-//             },
-//           }),
-//           fetch(`${API_BASE}/daily-plans/`, {
-//             credentials: "include",
-//             headers: {
-//               "Content-Type": "application/json",
-//               // Authorization: `Token ${localStorage.getItem("authToken")}`
-//             },
-//           }),
-//         ]);
-
-//         if (!goalsRes.ok || !plansRes.ok) {
-//           setError("Failed to load data from server.");
-//           setGoals([]);
-//           setDailyPlans([]);
-//           return;
-//         }
-
-//         const goalsData = await goalsRes.json().catch(() => []);
-//         const plansData = await plansRes.json().catch(() => []);
-
-//         setGoals(Array.isArray(goalsData) ? goalsData : []);
-//         setDailyPlans(Array.isArray(plansData) ? plansData : []);
-//       } catch (err) {
-//         console.error("Dashboard data error:", err);
-//         setError("Something went wrong while loading data.");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   // ---------------------------
-//   // Derived: Today's Plan
-//   // (keeps SAME structure as your dummy todaysPlan[])
-//   // ---------------------------
-//   const todaysPlan = useMemo(() => {
-//   if (!dailyPlans.length) return [];
-
-//   const todayISO = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
-
-//   return dailyPlans
-//     .filter((dp) => {
-//       if (!dp.date) return false;
-//       return String(dp.date).slice(0, 10) === todayISO;
-//     })
-//     .map((dp) => {
-//       const goalTitle = dp.goal_title || dp.goal?.title || "Daily Plan";
-
-//       let topicsArray = [];
-//       if (Array.isArray(dp.topics)) {
-//         topicsArray = dp.topics;
-//       } else if (typeof dp.topics === "string") {
-//         topicsArray = dp.topics
-//           .split(/[\n,]/)
-//           .map((t) => t.trim())
-//           .filter(Boolean);
-//       }
-
-//       const totalTopics = topicsArray.length || 1;
-//       const completed = dp.is_completed ? totalTopics : 0;
-
-//       return {
-//         id: dp.id,
-//         goalTitle,
-//         topics: topicsArray.length ? topicsArray : ["Study session"],
-//         plannedHours: dp.study_hours || 0,
-//         completed,
-//         totalTopics,
-//       };
-//     });
-// }, [dailyPlans]);
-
-
-//   // ---------------------------
-//   // Derived: Weekly Progress (last 7 days)
-//   // ---------------------------
-//   const weeklyProgress = useMemo(() => {
-//     if (!dailyPlans.length) {
-//       return {
-//         hoursPlanned: 0,
-//         hoursCompleted: 0,
-//         percent: 0,
-//       };
-//     }
-
-//     const now = new Date();
-//     const sevenDaysAgo = new Date();
-//     sevenDaysAgo.setDate(now.getDate() - 6); // including today
-
-//     let planned = 0;
-//     let completed = 0;
-
-//     for (const dp of dailyPlans) {
-//       if (!dp.date) continue;
-//       const d = new Date(dp.date);
-//       if (isNaN(d.getTime())) continue;
-
-//       if (d >= sevenDaysAgo && d <= now) {
-//         const hrs = Number(dp.study_hours) || 0;
-//         planned += hrs;
-//         if (dp.is_completed) {
-//           completed += hrs;
-//         }
-//       }
-//     }
-
-//     const percent =
-//       planned === 0 ? 0 : Math.round((completed / planned) * 100);
-
-//     return {
-//       hoursPlanned: planned,
-//       hoursCompleted: completed,
-//       percent,
-//     };
-//   }, [dailyPlans]);
-
-//   // ---------------------------
-//   // AI: generate-plan
-//   // ---------------------------
-//   const handleGenerateAIPlan = async () => {
-//     try {
-//       setAiLoading(true);
-//       setAiHint("Generating plan...");
-
-//       const today = new Date().toISOString().slice(0, 10);
-
-//       const res = await fetch(`${API_BASE}/ai/generate-plan/`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           // Authorization: `Token ${localStorage.getItem("authToken")}`
-//         },
-//         body: JSON.stringify({
-//           date: today,
-//           // Optionally send goal ids if your backend wants them:
-//           // goals: goals.map((g) => g.id),
-//         }),
-//         credentials: "include",
-//       });
-
-//       if (!res.ok) {
-//         const data = await res.json().catch(() => ({}));
-//         setAiHint(
-//           data.detail ||
-//             data.error ||
-//             "Could not generate a plan right now. Try again."
-//         );
-//         return;
-//       }
-
-//       const data = await res.json().catch(() => ({}));
-
-//       setAiHint(
-//         data.plan ||
-//           data.suggestion ||
-//           data.message ||
-//           JSON.stringify(data, null, 2)
-//       );
-//     } catch (err) {
-//       console.error("AI generate error:", err);
-//       setAiHint("Something went wrong. Please try again.");
-//     } finally {
-//       setAiLoading(false);
-//     }
-//   };
-
-//   // ---------------------------
-//   // Logout (optional redirect)
-//   // ---------------------------
-//   const handleLogout = () => {
-//     localStorage.removeItem("authToken");
-//     localStorage.removeItem("userInfo");
-//     navigate("/login");
-//   };
-
-//   // ---------------------------
-//   // Date text (same as your dummy)
-//   // ---------------------------
-//   const todayText = new Date().toLocaleDateString("en-IN", {
-//     weekday: "long",
-//     day: "numeric",
-//     month: "short",
-//     year: "numeric",
-//   });
-
-//   const { hoursPlanned, hoursCompleted, percent: weeklyPercent } =
-//     weeklyProgress;
-
-//   // ---------------------------
-//   // JSX – SAME STRUCTURE & CLASSES
-//   // ---------------------------
-//   return (
-//     <div className="dash-root">
-//       <div className="dash-container">
-//         {/* ===== Top Bar ===== */}
-//         <header className="dash-header">
-//           <div className="dash-greeting">
-//             <p className="dash-greeting-label">Welcome back,</p>
-//             <h1 className="dash-greeting-title">
-//               {user.name} 👋
-//             </h1>
-//             <p className="dash-greeting-subtitle">
-//               Today is <span className="pill pill-date">{todayText}</span>.{"  "}
-//               Stay consistent and your goals will follow.
-//             </p>
-//           </div>
-
-//           <div className="dash-user-card">
-//             <div className="dash-user-info">
-//               <div className="dash-avatar">
-//                 {user.name ? user.name.charAt(0).toUpperCase() : "U"}
-//               </div>
-//               <div>
-//                 <p className="dash-user-name">{user.name}</p>
-//                 {user.email && (
-//                   <p className="dash-user-email">{user.email}</p>
-//                 )}
-//               </div>
-//             </div>
-//             <button className="dash-logout-btn" onClick={handleLogout}>
-//               Logout
-//             </button>
-//           </div>
-//         </header>
-
-//         {error && (
-//           <p className="error-text server-error" style={{ marginTop: "8px" }}>
-//             {error}
-//           </p>
-//         )}
-
-//         {/* ===== Main Grid ===== */}
-//         <main className="dash-main">
-//           {/* ------- Today’s Plan ------- */}
-//           <section className="dash-card dash-today">
-//             <div className="dash-card-header">
-//               <h2>Today&apos;s Plan</h2>
-//               <button
-//                 className="ghost-btn"
-//                 onClick={() => navigate("/daily-plan")}
-//               >
-//                 + Add Plan
-//               </button>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Focus on what matters most today. Mark topics as you complete
-//               them.
-//             </p>
-
-//             {loading ? (
-//               <p className="loading-text">Loading your daily plans...</p>
-//             ) : todaysPlan.length === 0 ? (
-//               <p className="empty-text">
-//                 No plans for today yet. Click <strong>+ Add Plan</strong> to
-//                 create one.
-//               </p>
-//             ) : (
-//               <div className="today-list">
-//                 {todaysPlan.map((plan) => {
-//                   const percent = Math.round(
-//                     (plan.completed / plan.totalTopics) * 100
-//                   );
-//                   return (
-//                     <div key={plan.id} className="today-item">
-//                       <div className="today-item-header">
-//                         <div className="today-item-goal">
-//                           <span className="today-goal-pill">
-//                             {plan.goalTitle}
-//                           </span>
-//                           <span className="today-hours">
-//                             {plan.plannedHours} hrs
-//                           </span>
-//                         </div>
-//                         <span className="today-progress-label">
-//                           {plan.completed}/{plan.totalTopics} done
-//                         </span>
-//                       </div>
-
-//                       <div className="today-topics">
-//                         {plan.topics.map((topic, idx) => (
-//                           <div key={idx} className="topic-pill">
-//                             <span className="topic-dot" />
-//                             <span>{topic}</span>
-//                           </div>
-//                         ))}
-//                       </div>
-
-//                       <div className="today-progress-bar">
-//                         <div
-//                           className="today-progress-fill"
-//                           style={{ width: `${percent}%` }}
-//                         />
-//                       </div>
-//                     </div>
-//                   );
-//                 })}
-//               </div>
-//             )}
-//           </section>
-
-//           {/* ------- Goals & Deadlines ------- */}
-//           <section className="dash-card dash-goals">
-//             <div className="dash-card-header">
-//               <h2>Goals & Deadlines</h2>
-//               <button
-//                 className="ghost-btn"
-//                 onClick={() => navigate("/goal")}
-//               >
-//                 Manage Goals
-//               </button>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Keep an eye on your upcoming deadlines and overall progress.
-//             </p>
-
-//             {loading ? (
-//               <p className="loading-text">Loading your goals...</p>
-//             ) : goals.length === 0 ? (
-//               <p className="empty-text">
-//                 No goals yet. Click <strong>Manage Goals</strong> to create
-//                 one.
-//               </p>
-//             ) : (
-//               <div className="goals-list">
-//                 {goals.map((goal) => {
-//                   // Try to infer progress/status if your API doesn’t have them
-//                   const progress =
-//                     typeof goal.progress === "number" ? goal.progress : 0;
-//                   const status =
-//                     goal.status ||
-//                     (progress >= 100
-//                       ? "Completed"
-//                       : progress > 0
-//                       ? "In Progress"
-//                       : "Not Started");
-
-//                   return (
-//                     <div key={goal.id} className="goal-item">
-//                       <div className="goal-main">
-//                         <p className="goal-title">{goal.title}</p>
-//                         {goal.deadline && (
-//                           <p className="goal-deadline">
-//                             Due:{" "}
-//                             <span>
-//                               {new Date(goal.deadline).toLocaleDateString()}
-//                             </span>
-//                           </p>
-//                         )}
-//                       </div>
-//                       <div className="goal-meta">
-//                         <span
-//                           className={`status-pill status-${status
-//                             .toLowerCase()
-//                             .replace(" ", "-")}`}
-//                         >
-//                           {status}
-//                         </span>
-//                         <div className="goal-progress">
-//                           <div
-//                             className="goal-progress-fill"
-//                             style={{ width: `${progress}%` }}
-//                           />
-//                         </div>
-//                         <span className="goal-progress-text">
-//                           {progress}%
-//                         </span>
-//                       </div>
-//                     </div>
-//                   );
-//                 })}
-//               </div>
-//             )}
-//           </section>
-//         </main>
-
-//         {/* ===== Bottom Row ===== */}
-//         <section className="dash-bottom">
-//           {/* ------- Weekly Progress ------- */}
-//           <div className="dash-card dash-progress">
-//             <div className="dash-card-header">
-//               <h2>Weekly Progress</h2>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               You&apos;re building consistency. Keep your streak alive!
-//             </p>
-
-//             <div className="progress-summary">
-//               <div className="progress-numbers">
-//                 <div>
-//                   <p className="progress-label">Planned</p>
-//                   <p className="progress-value">{hoursPlanned} hrs</p>
-//                 </div>
-//                 <div>
-//                   <p className="progress-label">Completed</p>
-//                   <p className="progress-value">{hoursCompleted} hrs</p>
-//                 </div>
-//                 <div>
-//                   <p className="progress-label">Completion</p>
-//                   <p className="progress-value">{weeklyPercent}%</p>
-//                 </div>
-//               </div>
-
-//               <div className="progress-bar">
-//                 <div
-//                   className="progress-bar-fill"
-//                   style={{ width: `${weeklyPercent}%` }}
-//                 />
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* ------- AI Study Suggestions ------- */}
-//           <div className="dash-card dash-ai">
-//             <div className="dash-card-header">
-//               <h2>AI Study Suggestions</h2>
-//               <span className="pill pill-ai">Smart Tips</span>
-//             </div>
-//             <p className="dash-card-subtitle">
-//               Powered by your goals and recent activity.
-//             </p>
-
-//             <p className="ai-text">{aiHint}</p>
-
-//             <div className="ai-actions">
-//               <button
-//                 className="primary-btn"
-//                 onClick={handleGenerateAIPlan}
-//                 disabled={aiLoading}
-//               >
-//                 {aiLoading ? "Generating..." : "Open AI Planner"}
-//               </button>
-//               <button
-//                 className="ghost-btn subtle"
-//                 onClick={handleGenerateAIPlan}
-//                 disabled={aiLoading}
-//               >
-//                 Refresh Suggestion
-//               </button>
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-// PRODUCTION WITH COOKIE
-
-// src/pages/Dashboard.jsx
-// import React, { useEffect, useState, useMemo } from "react";
-// import { useNavigate } from "react-router-dom";
-// import "./Dashboard.css";
-
-// const API_BASE = "https://dailylearningplan.onrender.com/api";
-
-// export default function Dashboard() {
-//   const navigate = useNavigate();
-
-//   const [user, setUser] = useState({
-//     name: "Learner",
-//     email: "",
-//   });
-
-//   const [goals, setGoals] = useState([]);
-//   const [dailyPlans, setDailyPlans] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [aiLoading, setAiLoading] = useState(false);
+//   const [showTodayFull, setShowTodayFull] = useState(false);
+//   const [showGoalsFull, setShowGoalsFull] = useState(false);
 //   const [aiHint, setAiHint] = useState(
 //     "Click the button to generate an AI-powered study suggestion."
 //   );
@@ -944,76 +174,109 @@
 //     };
 //   }, [dailyPlans]);
 
+//   // ---------------------------
+//   // Parsed AI plan (Day 1, Day 2, ...)
+//   // ---------------------------
+//   const parsedAiPlan = useMemo(() => {
+//     const text = aiHint || "";
+//     const lower = text.toLowerCase();
 
+//     // If it's clearly not a schedule, don't parse
+//     if (
+//       !text ||
+//       lower.startsWith("click the button") ||
+//       lower.startsWith("you need to create") ||
+//       lower.startsWith("generating plan") ||
+//       lower.startsWith("something went wrong") ||
+//       lower.startsWith("could not generate")
+//     ) {
+//       return [];
+//     }
 
-// const handleGenerateAIPlan = async () => {
-//   // Make sure there is at least one goal
-//   if (!goals.length) {
-//     setAiHint(
-//       "You need to create at least one goal before generating an AI plan."
-//     );
-//     return;
-//   }
+//     const result = [];
+//     const regex = /Day\s+(\d+):\s*([^]+?)(?=(?:Day\s+\d+:)|$)/g;
+//     let match;
 
-//   try {
-//     setAiLoading(true);
-//     setAiHint("Generating plan...");
+//     while ((match = regex.exec(text)) !== null) {
+//       const dayNumber = match[1];
+//       const content = match[2].trim();
 
-//     const today = new Date().toISOString().slice(0, 10);
+//       result.push({
+//         day: Number(dayNumber),
+//         content,
+//       });
+//     }
 
-//     // For now, use the first goal in the list.
-//     // Later you can add a dropdown to let the user pick which goal.
-//     const activeGoalId = goals[0].id;
+//     return result;
+//   }, [aiHint]);
 
-//     // How many days of plan to generate (adjust if your API expects something else)
-//     const totalDays = 7;
-
-//     const res = await fetch(`${API_BASE}/ai/generate-plan/`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         date: today,      // optional, if your backend uses it
-//         goal_id: activeGoalId,
-//         days: totalDays,
-//       }),
-//       credentials: "include",
-//     });
-
-//     if (!res.ok) {
-//       const data = await res.json().catch(() => ({}));
+//   // ---------------------------
+//   // AI: generate-plan
+//   // ---------------------------
+//   const handleGenerateAIPlan = async () => {
+//     // Make sure there is at least one goal
+//     if (!goals.length) {
 //       setAiHint(
-//         data.detail ||
-//           data.error ||
-//           "Could not generate a plan right now. Try again."
+//         "You need to create at least one goal before generating an AI plan."
 //       );
 //       return;
 //     }
 
-//     const data = await res.json().catch(() => ({}));
+//     try {
+//       setAiLoading(true);
+//       setAiHint("Generating plan...");
 
-//     setAiHint(
-//       data.plan ||
-//         data.suggestion ||
-//         data.message ||
-//         JSON.stringify(data, null, 2)
-//     );
-//   } catch (err) {
-//     console.error("AI generate error:", err);
-//     setAiHint("Something went wrong. Please try again.");
-//   } finally {
-//     setAiLoading(false);
-//   }
-// };
+//       const today = new Date().toISOString().slice(0, 10);
 
+//       // For now, use the first goal in the list.
+//       const activeGoalId = goals[0].id;
 
+//       // How many days of plan to generate
+//       const totalDays = 7;
+
+//       const res = await fetch(`${API_BASE}/ai/generate-plan/`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           date: today, // optional, if your backend uses it
+//           goal_id: activeGoalId,
+//           days: totalDays,
+//         }),
+//         credentials: "include",
+//       });
+
+//       if (!res.ok) {
+//         const data = await res.json().catch(() => ({}));
+//         setAiHint(
+//           data.detail ||
+//             data.error ||
+//             "Could not generate a plan right now. Try again."
+//         );
+//         return;
+//       }
+
+//       const data = await res.json().catch(() => ({}));
+
+//       setAiHint(
+//         data.plan ||
+//           data.suggestion ||
+//           data.message ||
+//           JSON.stringify(data, null, 2)
+//       );
+//     } catch (err) {
+//       console.error("AI generate error:", err);
+//       setAiHint("Something went wrong. Please try again.");
+//     } finally {
+//       setAiLoading(false);
+//     }
+//   };
 
 //   // ---------------------------
 //   // Logout (optional redirect)
 //   // ---------------------------
 //   const handleLogout = () => {
-//     // We only control frontend state; backend cookie will expire on its own or via a logout endpoint.
 //     localStorage.removeItem("userInfo");
 //     navigate("/login");
 //   };
@@ -1082,7 +345,7 @@
 //               <h2>Today&apos;s Plan</h2>
 //               <button
 //                 className="ghost-btn"
-//                 onClick={() => navigate("/daily-plan")}
+//                 onClick={() => navigate("/DailyPlan")}
 //               >
 //                 + Add Plan
 //               </button>
@@ -1264,7 +527,20 @@
 //               Powered by your goals and recent activity.
 //             </p>
 
-//             <p className="ai-text">{aiHint}</p>
+//             {parsedAiPlan && parsedAiPlan.length > 0 ? (
+//               <div className="ai-plan-list">
+//                 {parsedAiPlan.map((item) => (
+//                   <div key={item.day} className="ai-day-card">
+//                     <div className="ai-day-header">
+//                       <span className="ai-day-pill">Day {item.day}</span>
+//                     </div>
+//                     <p className="ai-day-content">{item.content}</p>
+//                   </div>
+//                 ))}
+//               </div>
+//             ) : (
+//               <p className="ai-text">{aiHint}</p>
+//             )}
 
 //             <div className="ai-actions">
 //               <button
@@ -1291,7 +567,574 @@
 
 
 
-// CODE WITH BEAUTIFUL UI
+// import React, { useEffect, useState, useMemo } from "react";
+// import { useNavigate } from "react-router-dom";
+// import "./Dashboard.css";
+
+// const API_BASE = "https://dailylearningplan.onrender.com/api";
+
+// export default function Dashboard() {
+//   const navigate = useNavigate();
+
+//   const [user, setUser] = useState({
+//     name: "Learner",
+//     email: "",
+//   });
+
+//   const [goals, setGoals] = useState([]);
+//   const [dailyPlans, setDailyPlans] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [aiLoading, setAiLoading] = useState(false);
+//   const [aiHint, setAiHint] = useState(
+//     "Click the button to generate an AI-powered study suggestion."
+//   );
+//   const [error, setError] = useState("");
+
+//   // NEW: collapse states
+//   const [showTodayFull, setShowTodayFull] = useState(false);
+//   const [showGoalsFull, setShowGoalsFull] = useState(false);
+
+//   // ---------------------------
+//   // Load user & fetch data
+//   // ---------------------------
+//   useEffect(() => {
+//     const storedUser = localStorage.getItem("userInfo");
+//     if (!storedUser) {
+//       navigate("/login");
+//       return;
+//     }
+
+//     try {
+//       setUser(JSON.parse(storedUser));
+//     } catch {
+//       localStorage.removeItem("userInfo");
+//       navigate("/login");
+//       return;
+//     }
+
+//     const fetchData = async () => {
+//       try {
+//         setLoading(true);
+//         setError("");
+
+//         const [goalsRes, plansRes] = await Promise.all([
+//           fetch(`${API_BASE}/goals/`, {
+//             credentials: "include",
+//             headers: { "Content-Type": "application/json" },
+//           }),
+//           fetch(`${API_BASE}/daily-plans/`, {
+//             credentials: "include",
+//             headers: { "Content-Type": "application/json" },
+//           }),
+//         ]);
+
+//         if (!goalsRes.ok || !plansRes.ok) {
+//           setError("Failed to load data from server.");
+//           setGoals([]);
+//           setDailyPlans([]);
+//           return;
+//         }
+
+//         const goalsData = await goalsRes.json().catch(() => []);
+//         const plansData = await plansRes.json().catch(() => []);
+
+//         setGoals(Array.isArray(goalsData) ? goalsData : []);
+//         setDailyPlans(Array.isArray(plansData) ? plansData : []);
+//       } catch (err) {
+//         console.error("Dashboard data error:", err);
+//         setError("Something went wrong while loading data.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, [navigate]);
+
+//   // ---------------------------
+//   // Today's Plan
+//   // ---------------------------
+//   // const todaysPlan = useMemo(() => {
+//   //   if (!dailyPlans.length) return [];
+
+//   //   // const todayISO = new Date().toISOString().slice(0, 10);
+//   //   // Local date in YYYY-MM-DD format
+//   //   const todayISO = new Date().toLocaleDateString("en-CA"); // ex: "2025-12-02"
+
+
+//   //   return dailyPlans
+//   //     .filter((dp) => dp.date && String(dp.date).slice(0, 10) === todayISO)
+//   //     .map((dp) => {
+//   //       const goalTitle = dp.goal_title || dp.goal?.title || "Daily Plan";
+//   //       let topicsArray = [];
+
+//   //       if (Array.isArray(dp.topics)) topicsArray = dp.topics;
+//   //       else if (typeof dp.topics === "string")
+//   //         topicsArray = dp.topics
+//   //           .split(/[\n,]/)
+//   //           .map((t) => t.trim())
+//   //           .filter(Boolean);
+
+//   //       const totalTopics = topicsArray.length || 1;
+//   //       const completed = dp.is_completed ? totalTopics : 0;
+
+//   //       return {
+//   //         id: dp.id,
+//   //         goalTitle,
+//   //         topics: topicsArray.length ? topicsArray : ["Study session"],
+//   //         plannedHours: dp.study_hours || 0,
+//   //         completed,
+//   //         totalTopics,
+//   //       };
+//   //     });
+//   // }, [dailyPlans]);
+
+
+//   const todaysPlan = useMemo(() => {
+//   if (!dailyPlans.length) return [];
+
+//   const todayISO = new Date().toLocaleDateString("en-CA"); // FIXED DATE
+
+//   const normalize = (d) => new Date(d).toLocaleDateString("en-CA");
+
+//   return dailyPlans
+//     .filter((dp) => dp.date && normalize(dp.date) === todayISO)
+//     .map((dp) => {
+//       const goalTitle = dp.goal_title || dp.goal?.title || "Daily Plan";
+
+//       let topicsArray = [];
+//       if (Array.isArray(dp.topics)) topicsArray = dp.topics;
+//       else if (typeof dp.topics === "string")
+//         topicsArray = dp.topics
+//           .split(/[\n,]/)
+//           .map((t) => t.trim())
+//           .filter(Boolean);
+
+//       const totalTopics = topicsArray.length || 1;
+//       const completed = dp.is_completed ? totalTopics : 0;
+
+//       return {
+//         id: dp.id,
+//         goalTitle,
+//         topics: topicsArray.length ? topicsArray : ["Study session"],
+//         plannedHours: dp.study_hours || dp.planned_hours || 0,
+//         completed,
+//         totalTopics,
+//       };
+//     });
+// }, [dailyPlans]);
+
+//   // ---------------------------
+//   // Weekly Progress
+//   // ---------------------------
+//   const weeklyProgress = useMemo(() => {
+//     if (!dailyPlans.length)
+//       return { hoursPlanned: 0, hoursCompleted: 0, percent: 0 };
+
+//     const now = new Date();
+//     const sevenDaysAgo = new Date();
+//     sevenDaysAgo.setDate(now.getDate() - 6);
+
+//     let planned = 0;
+//     let completed = 0;
+
+//     for (const dp of dailyPlans) {
+//       if (!dp.date) continue;
+//       const d = new Date(dp.date);
+//       if (isNaN(d.getTime())) continue;
+
+//       if (d >= sevenDaysAgo && d <= now) {
+//         const hrs = Number(dp.study_hours) || 0;
+//         planned += hrs;
+//         if (dp.is_completed) completed += hrs;
+//       }
+//     }
+
+//     const percent = planned ? Math.round((completed / planned) * 100) : 0;
+
+//     return { hoursPlanned: planned, hoursCompleted: completed, percent };
+//   }, [dailyPlans]);
+
+//   // ---------------------------
+//   // AI Parsing
+//   // ---------------------------
+//   const parsedAiPlan = useMemo(() => {
+//     const text = aiHint || "";
+//     const lower = text.toLowerCase();
+
+//     if (
+//       !text ||
+//       lower.startsWith("click") ||
+//       lower.startsWith("you need") ||
+//       lower.startsWith("generating") ||
+//       lower.startsWith("something went wrong") ||
+//       lower.startsWith("could not")
+//     )
+//       return [];
+
+//     const result = [];
+//     const regex = /Day\s+(\d+):\s*([^]+?)(?=(?:Day\s+\d+:)|$)/g;
+//     let match;
+
+//     while ((match = regex.exec(text)) !== null) {
+//       result.push({
+//         day: Number(match[1]),
+//         content: match[2].trim(),
+//       });
+//     }
+
+//     return result;
+//   }, [aiHint]);
+
+//   // ---------------------------
+//   // AI Generate Plan
+//   // ---------------------------
+//   const handleGenerateAIPlan = async () => {
+//     if (!goals.length) {
+//       setAiHint("You need to create at least one goal first.");
+//       return;
+//     }
+
+//     try {
+//       setAiLoading(true);
+//       setAiHint("Generating plan...");
+
+//       const today = new Date().toISOString().slice(0, 10);
+//       const activeGoalId = goals[0].id;
+
+//       const res = await fetch(`${API_BASE}/ai/generate-plan/`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         credentials: "include",
+//         body: JSON.stringify({
+//           date: today,
+//           goal_id: activeGoalId,
+//           days: 7,
+//         }),
+//       });
+
+//       const data = await res.json().catch(() => ({}));
+
+//       if (!res.ok) {
+//         setAiHint(
+//           data.detail ||
+//             data.error ||
+//             "Could not generate a plan. Try again later."
+//         );
+//         return;
+//       }
+
+//       setAiHint(data.plan || data.suggestion || data.message);
+//     } catch (err) {
+//       console.error(err);
+//       setAiHint("Something went wrong.");
+//     } finally {
+//       setAiLoading(false);
+//     }
+//   };
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("userInfo");
+//     navigate("/login");
+//   };
+
+//   const todayText = new Date().toLocaleDateString("en-IN", {
+//     weekday: "long",
+//     day: "numeric",
+//     month: "short",
+//     year: "numeric",
+//   });
+
+//   const { hoursPlanned, hoursCompleted, percent: weeklyPercent } =
+//     weeklyProgress;
+
+
+
+  
+//   // ---------------------------
+//   // JSX
+//   // ---------------------------
+//   return (
+//     <div className="dash-root">
+//       <div className="dash-container">
+
+//         {/* HEADER */}
+//         <header className="dash-header">
+//           <div className="dash-greeting">
+//             <p className="dash-greeting-label">Welcome back,</p>
+//             <h1 className="dash-greeting-title">
+//               <span className="dash-greeting-name">{user.name}</span>
+//               <span className="emoji">👋</span>
+//             </h1>
+//             <p className="dash-greeting-subtitle">
+//               Today is <span className="pill pill-date">{todayText}</span> — stay consistent!
+//             </p>
+//           </div>
+
+//           <div className="dash-user-card">
+//             <div className="dash-user-info">
+//               <div className="dash-avatar">
+//                 {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+//               </div>
+//               <div>
+//                 <p className="dash-user-name">{user.name}</p>
+//                 {user.email && <p className="dash-user-email">{user.email}</p>}
+//               </div>
+//             </div>
+//             <button className="dash-logout-btn" onClick={handleLogout}>
+//               Logout
+//             </button>
+//           </div>
+//         </header>
+
+//         {error && <p className="error-text server-error">{error}</p>}
+
+//         {/* ---------------------------------- */}
+//         {/* TODAY'S PLAN (COLLAPSIBLE)         */}
+//         {/* ---------------------------------- */}
+
+//         <main className="dash-main">
+//           <section className="dash-card dash-today">
+//             <div className="dash-card-header">
+//               <h2>Today&apos;s Plan</h2>
+//               <button
+//                 className="ghost-btn"
+//                 onClick={() => navigate("/DailyPlan")}
+//               >
+//                 + Add Plan
+//               </button>
+//             </div>
+
+//             {loading ? (
+//               <p className="loading-text">Loading...</p>
+//             ) : todaysPlan.length === 0 ? (
+//               <p>No plans yet.</p>
+//             ) : (
+//               <div className="today-list">
+//                 {(showTodayFull ? todaysPlan : todaysPlan.slice(0, 2)).map(
+//                   (plan) => {
+//                     const percent = Math.round(
+//                       (plan.completed / plan.totalTopics) * 100
+//                     );
+
+//                     return (
+//                       <div key={plan.id} className="today-item">
+//                         <div className="today-item-header">
+//                           <div className="today-item-goal">
+//                             <span className="today-goal-pill">
+//                               {plan.goalTitle}
+//                             </span>
+//                             <span className="today-hours">
+//                               {plan.plannedHours} hrs
+//                             </span>
+//                           </div>
+//                           <span className="today-progress-label">
+//                             {plan.completed}/{plan.totalTopics} done
+//                           </span>
+//                         </div>
+
+//                         <div className="today-topics">
+//                           {plan.topics.map((topic, idx) => (
+//                             <div key={idx} className="topic-pill">
+//                               <span className="topic-dot" />
+//                               <span>{topic}</span>
+//                             </div>
+//                           ))}
+//                         </div>
+
+//                         <div className="today-progress-bar">
+//                           <div
+//                             className="today-progress-fill"
+//                             style={{ width: `${percent}%` }}
+//                           />
+//                         </div>
+//                       </div>
+//                     );
+//                   }
+//                 )}
+
+//                 {todaysPlan.length > 2 && (
+//                   <button
+//                     className="collapse-btn"
+//                     onClick={() => setShowTodayFull(!showTodayFull)}
+//                   >
+//                     {showTodayFull
+//                       ? "Show Less"
+//                       : `Show ${todaysPlan.length - 2} More`}
+//                   </button>
+//                 )}
+//               </div>
+//             )}
+//           </section>
+
+//           {/* ---------------------------------- */}
+//           {/* GOALS & DEADLINES (COLLAPSIBLE)   */}
+//           {/* ---------------------------------- */}
+
+//           <section className="dash-card dash-goals">
+//             <div className="dash-card-header">
+//               <h2>Goals & Deadlines</h2>
+//               <button className="ghost-btn" onClick={() => navigate("/goal")}>
+//                 Manage Goals
+//               </button>
+//             </div>
+
+//             {loading ? (
+//               <p>Loading...</p>
+//             ) : goals.length === 0 ? (
+//               <p>No goals yet.</p>
+//             ) : (
+//               <div className="goals-list">
+//                 {(showGoalsFull ? goals : goals.slice(0, 3)).map((goal) => {
+//                   const progress =
+//                     typeof goal.progress === "number" ? goal.progress : 0;
+//                   const status =
+//                     goal.status ||
+//                     (progress >= 100
+//                       ? "Completed"
+//                       : progress > 0
+//                       ? "In Progress"
+//                       : "Not Started");
+
+//                   return (
+//                     <div key={goal.id} className="goal-item">
+//                       <div className="goal-main">
+//                         <p className="goal-title">{goal.title}</p>
+//                         {goal.deadline && (
+//                           <p className="goal-deadline">
+//                             Due:{" "}
+//                             <span>
+//                               {new Date(goal.deadline).toLocaleDateString()}
+//                             </span>
+//                           </p>
+//                         )}
+//                       </div>
+
+//                       <div className="goal-meta">
+//                         <span
+//                           className={`status-pill status-${status
+//                             .toLowerCase()
+//                             .replace(" ", "-")}`}
+//                         >
+//                           {status}
+//                         </span>
+
+//                         <div className="goal-progress">
+//                           <div
+//                             className="goal-progress-fill"
+//                             style={{ width: `${progress}%` }}
+//                           />
+//                         </div>
+
+//                         <span className="goal-progress-text">
+//                           {progress}%
+//                         </span>
+//                       </div>
+//                     </div>
+//                   );
+//                 })}
+
+//                 {goals.length > 3 && (
+//                   <button
+//                     className="collapse-btn"
+//                     onClick={() => setShowGoalsFull(!showGoalsFull)}
+//                   >
+//                     {showGoalsFull
+//                       ? "Show Less"
+//                       : `Show ${goals.length - 3} More`}
+//                   </button>
+//                 )}
+//               </div>
+//             )}
+//           </section>
+//         </main>
+
+//         {/* ---------------------------------- */}
+//         {/* BOTTOM SECTION                     */}
+//         {/* ---------------------------------- */}
+
+//         <section className="dash-bottom">
+//           <div className="dash-card dash-progress">
+//             <div className="dash-card-header">
+//               <h2>Weekly Progress</h2>
+//             </div>
+
+//             <div className="progress-summary">
+//               <div className="progress-numbers">
+//                 <div>
+//                   <p className="progress-label">Planned</p>
+//                   <p className="progress-value">{hoursPlanned} hrs</p>
+//                 </div>
+
+//                 <div>
+//                   <p className="progress-label">Completed</p>
+//                   <p className="progress-value">{hoursCompleted} hrs</p>
+//                 </div>
+
+//                 <div>
+//                   <p className="progress-label">Completion</p>
+//                   <p className="progress-value">{weeklyPercent}%</p>
+//                 </div>
+//               </div>
+
+//               <div className="progress-bar">
+//                 <div
+//                   className="progress-bar-fill"
+//                   style={{ width: `${weeklyPercent}%` }}
+//                 />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* AI Suggestions */}
+//           <div className="dash-card dash-ai">
+//             <div className="dash-card-header">
+//               <h2>AI Study Suggestions</h2>
+//               <span className="pill pill-ai">Smart Tips</span>
+//             </div>
+
+//             {parsedAiPlan.length > 0 ? (
+//               <div className="ai-plan-list">
+//                 {parsedAiPlan.map((item) => (
+//                   <div key={item.day} className="ai-day-card">
+//                     <div className="ai-day-header">
+//                       <span className="ai-day-pill">Day {item.day}</span>
+//                     </div>
+//                     <p className="ai-day-content">{item.content}</p>
+//                   </div>
+//                 ))}
+//               </div>
+//             ) : (
+//               <p className="ai-text">{aiHint}</p>
+//             )}
+
+//             <div className="ai-actions">
+//               <button
+//                 className="primary-btn"
+//                 onClick={handleGenerateAIPlan}
+//                 disabled={aiLoading}
+//               >
+//                 {aiLoading ? "Generating..." : "Open AI Planner"}
+//               </button>
+
+//               <button
+//                 className="ghost-btn subtle"
+//                 onClick={handleGenerateAIPlan}
+//                 disabled={aiLoading}
+//               >
+//                 Refresh Suggestion
+//               </button>
+//             </div>
+//           </div>
+//         </section>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// AI UPDATED
 
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
@@ -1316,14 +1159,16 @@ export default function Dashboard() {
   );
   const [error, setError] = useState("");
 
+  // collapse states
+  const [showTodayFull, setShowTodayFull] = useState(false);
+  const [showGoalsFull, setShowGoalsFull] = useState(false);
+
   // ---------------------------
   // Load user & fetch data
   // ---------------------------
   useEffect(() => {
-    // 1️⃣ Check if we have a logged-in user
     const storedUser = localStorage.getItem("userInfo");
     if (!storedUser) {
-      // Not logged in: go back to login
       navigate("/login");
       return;
     }
@@ -1331,13 +1176,11 @@ export default function Dashboard() {
     try {
       setUser(JSON.parse(storedUser));
     } catch {
-      // Corrupted user info → clear & go to login
       localStorage.removeItem("userInfo");
       navigate("/login");
       return;
     }
 
-    // 2️⃣ Fetch dashboard data for this user
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -1345,16 +1188,12 @@ export default function Dashboard() {
 
         const [goalsRes, plansRes] = await Promise.all([
           fetch(`${API_BASE}/goals/`, {
-            credentials: "include", // sends auth_token cookie
-            headers: {
-              "Content-Type": "application/json",
-            },
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
           }),
           fetch(`${API_BASE}/daily-plans/`, {
-            credentials: "include", // sends auth_token cookie
-            headers: {
-              "Content-Type": "application/json",
-            },
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
           }),
         ]);
 
@@ -1382,31 +1221,25 @@ export default function Dashboard() {
   }, [navigate]);
 
   // ---------------------------
-  // Derived: Today's Plan
-  // (keeps SAME structure as your dummy todaysPlan[])
+  // Today's Plan
   // ---------------------------
   const todaysPlan = useMemo(() => {
     if (!dailyPlans.length) return [];
 
-    const todayISO = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+    const todayISO = new Date().toLocaleDateString("en-CA");
 
     return dailyPlans
-      .filter((dp) => {
-        if (!dp.date) return false;
-        return String(dp.date).slice(0, 10) === todayISO;
-      })
+      .filter((dp) => dp.date && new Date(dp.date).toLocaleDateString("en-CA") === todayISO)
       .map((dp) => {
         const goalTitle = dp.goal_title || dp.goal?.title || "Daily Plan";
 
         let topicsArray = [];
-        if (Array.isArray(dp.topics)) {
-          topicsArray = dp.topics;
-        } else if (typeof dp.topics === "string") {
+        if (Array.isArray(dp.topics)) topicsArray = dp.topics;
+        else if (typeof dp.topics === "string")
           topicsArray = dp.topics
             .split(/[\n,]/)
             .map((t) => t.trim())
             .filter(Boolean);
-        }
 
         const totalTopics = topicsArray.length || 1;
         const completed = dp.is_completed ? totalTopics : 0;
@@ -1414,8 +1247,8 @@ export default function Dashboard() {
         return {
           id: dp.id,
           goalTitle,
-          topics: topicsArray.length ? topicsArray : ["Study session"],
-          plannedHours: dp.study_hours || 0,
+          topics: topicsArray,
+          plannedHours: dp.planned_hours || 0,
           completed,
           totalTopics,
         };
@@ -1423,20 +1256,15 @@ export default function Dashboard() {
   }, [dailyPlans]);
 
   // ---------------------------
-  // Derived: Weekly Progress (last 7 days)
+  // Weekly Progress
   // ---------------------------
   const weeklyProgress = useMemo(() => {
-    if (!dailyPlans.length) {
-      return {
-        hoursPlanned: 0,
-        hoursCompleted: 0,
-        percent: 0,
-      };
-    }
+    if (!dailyPlans.length)
+      return { hoursPlanned: 0, hoursCompleted: 0, percent: 0 };
 
     const now = new Date();
     const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(now.getDate() - 6); // including today
+    sevenDaysAgo.setDate(now.getDate() - 6);
 
     let planned = 0;
     let completed = 0;
@@ -1444,57 +1272,45 @@ export default function Dashboard() {
     for (const dp of dailyPlans) {
       if (!dp.date) continue;
       const d = new Date(dp.date);
-      if (isNaN(d.getTime())) continue;
+      if (isNaN(d)) continue;
 
       if (d >= sevenDaysAgo && d <= now) {
-        const hrs = Number(dp.study_hours) || 0;
+        const hrs = Number(dp.planned_hours) || 0;
         planned += hrs;
-        if (dp.is_completed) {
-          completed += hrs;
-        }
+        if (dp.is_completed) completed += hrs;
       }
     }
 
-    const percent =
-      planned === 0 ? 0 : Math.round((completed / planned) * 100);
+    const percent = planned ? Math.round((completed / planned) * 100) : 0;
 
-    return {
-      hoursPlanned: planned,
-      hoursCompleted: completed,
-      percent,
-    };
+    return { hoursPlanned: planned, hoursCompleted: completed, percent };
   }, [dailyPlans]);
 
   // ---------------------------
-  // Parsed AI plan (Day 1, Day 2, ...)
+  // AI Parsing
   // ---------------------------
   const parsedAiPlan = useMemo(() => {
     const text = aiHint || "";
     const lower = text.toLowerCase();
 
-    // If it's clearly not a schedule, don't parse
     if (
       !text ||
-      lower.startsWith("click the button") ||
-      lower.startsWith("you need to create") ||
-      lower.startsWith("generating plan") ||
+      lower.startsWith("click") ||
+      lower.startsWith("you need") ||
+      lower.startsWith("generating") ||
       lower.startsWith("something went wrong") ||
-      lower.startsWith("could not generate")
-    ) {
+      lower.startsWith("could not")
+    )
       return [];
-    }
 
     const result = [];
     const regex = /Day\s+(\d+):\s*([^]+?)(?=(?:Day\s+\d+:)|$)/g;
     let match;
 
     while ((match = regex.exec(text)) !== null) {
-      const dayNumber = match[1];
-      const content = match[2].trim();
-
       result.push({
-        day: Number(dayNumber),
-        content,
+        day: Number(match[1]),
+        content: match[2].trim(),
       });
     }
 
@@ -1502,14 +1318,11 @@ export default function Dashboard() {
   }, [aiHint]);
 
   // ---------------------------
-  // AI: generate-plan
+  // AI Generate Plan — UPDATED
   // ---------------------------
   const handleGenerateAIPlan = async () => {
-    // Make sure there is at least one goal
     if (!goals.length) {
-      setAiHint(
-        "You need to create at least one goal before generating an AI plan."
-      );
+      setAiHint("You need to create at least one goal first.");
       return;
     }
 
@@ -1517,64 +1330,53 @@ export default function Dashboard() {
       setAiLoading(true);
       setAiHint("Generating plan...");
 
-      const today = new Date().toISOString().slice(0, 10);
+      const activeGoal = goals[0];
 
-      // For now, use the first goal in the list.
-      const activeGoalId = goals[0].id;
+      const today = new Date();
+      const deadline = new Date(activeGoal.deadline);
 
-      // How many days of plan to generate
-      const totalDays = 7;
+      let days = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+
+      if (days < 1) days = 1; // ensure minimum 1 day
 
       const res = await fetch(`${API_BASE}/ai/generate-plan/`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: today, // optional, if your backend uses it
-          goal_id: activeGoalId,
-          days: totalDays,
-        }),
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
+        body: JSON.stringify({
+          goal_id: activeGoal.id,
+          days: days,
+        }),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         setAiHint(
           data.detail ||
-            data.error ||
-            "Could not generate a plan right now. Try again."
+          data.error ||
+          "Could not generate a plan. Try again later."
         );
         return;
       }
 
-      const data = await res.json().catch(() => ({}));
-
-      setAiHint(
-        data.plan ||
-          data.suggestion ||
-          data.message ||
-          JSON.stringify(data, null, 2)
-      );
+      setAiHint(data.plan || data.suggestion || data.message);
     } catch (err) {
-      console.error("AI generate error:", err);
-      setAiHint("Something went wrong. Please try again.");
+      console.error(err);
+      setAiHint("Something went wrong.");
     } finally {
       setAiLoading(false);
     }
   };
 
   // ---------------------------
-  // Logout (optional redirect)
+  // Logout
   // ---------------------------
   const handleLogout = () => {
     localStorage.removeItem("userInfo");
     navigate("/login");
   };
 
-  // ---------------------------
-  // Date text (same as your dummy)
-  // ---------------------------
   const todayText = new Date().toLocaleDateString("en-IN", {
     weekday: "long",
     day: "numeric",
@@ -1586,21 +1388,22 @@ export default function Dashboard() {
     weeklyProgress;
 
   // ---------------------------
-  // JSX – SAME STRUCTURE & CLASSES
+  // JSX UI (unchanged)
   // ---------------------------
   return (
     <div className="dash-root">
       <div className="dash-container">
-        {/* ===== Top Bar ===== */}
+
+        {/* HEADER */}
         <header className="dash-header">
           <div className="dash-greeting">
             <p className="dash-greeting-label">Welcome back,</p>
             <h1 className="dash-greeting-title">
-              {user.name} 👋
+              <span className="dash-greeting-name">{user.name}</span>
+              <span className="emoji">👋</span>
             </h1>
             <p className="dash-greeting-subtitle">
-              Today is <span className="pill pill-date">{todayText}</span>.{"  "}
-              Stay consistent and your goals will follow.
+              Today is <span className="pill pill-date">{todayText}</span> — stay consistent!
             </p>
           </div>
 
@@ -1611,26 +1414,23 @@ export default function Dashboard() {
               </div>
               <div>
                 <p className="dash-user-name">{user.name}</p>
-                {user.email && (
-                  <p className="dash-user-email">{user.email}</p>
-                )}
+                {user.email && <p className="dash-user-email">{user.email}</p>}
               </div>
             </div>
+
             <button className="dash-logout-btn" onClick={handleLogout}>
               Logout
             </button>
           </div>
         </header>
 
-        {error && (
-          <p className="error-text server-error" style={{ marginTop: "8px" }}>
-            {error}
-          </p>
-        )}
+        {/* Server Error */}
+        {error && <p className="error-text server-error">{error}</p>}
 
-        {/* ===== Main Grid ===== */}
+        {/* ---------------------------------- */}
+        {/* TODAY’S PLAN */}
+        {/* ---------------------------------- */}
         <main className="dash-main">
-          {/* ------- Today’s Plan ------- */}
           <section className="dash-card dash-today">
             <div className="dash-card-header">
               <h2>Today&apos;s Plan</h2>
@@ -1641,90 +1441,90 @@ export default function Dashboard() {
                 + Add Plan
               </button>
             </div>
-            <p className="dash-card-subtitle">
-              Focus on what matters most today. Mark topics as you complete
-              them.
-            </p>
 
             {loading ? (
-              <p className="loading-text">Loading your daily plans...</p>
+              <p className="loading-text">Loading...</p>
             ) : todaysPlan.length === 0 ? (
-              <p className="empty-text">
-                No plans for today yet. Click <strong>+ Add Plan</strong> to
-                create one.
-              </p>
+              <p>No plans yet.</p>
             ) : (
               <div className="today-list">
-                {todaysPlan.map((plan) => {
-                  const percent = Math.round(
-                    (plan.completed / plan.totalTopics) * 100
-                  );
-                  return (
-                    <div key={plan.id} className="today-item">
-                      <div className="today-item-header">
-                        <div className="today-item-goal">
-                          <span className="today-goal-pill">
-                            {plan.goalTitle}
-                          </span>
-                          <span className="today-hours">
-                            {plan.plannedHours} hrs
+                {(showTodayFull ? todaysPlan : todaysPlan.slice(0, 2)).map(
+                  (plan) => {
+                    const percent = Math.round(
+                      (plan.completed / plan.totalTopics) * 100
+                    );
+
+                    return (
+                      <div key={plan.id} className="today-item">
+                        <div className="today-item-header">
+                          <div className="today-item-goal">
+                            <span className="today-goal-pill">
+                              {plan.goalTitle}
+                            </span>
+                            <span className="today-hours">
+                              {plan.plannedHours} hrs
+                            </span>
+                          </div>
+                          <span className="today-progress-label">
+                            {plan.completed}/{plan.totalTopics} done
                           </span>
                         </div>
-                        <span className="today-progress-label">
-                          {plan.completed}/{plan.totalTopics} done
-                        </span>
-                      </div>
 
-                      <div className="today-topics">
-                        {plan.topics.map((topic, idx) => (
-                          <div key={idx} className="topic-pill">
-                            <span className="topic-dot" />
-                            <span>{topic}</span>
-                          </div>
-                        ))}
-                      </div>
+                        <div className="today-topics">
+                          {plan.topics.map((topic, idx) => (
+                            <div key={idx} className="topic-pill">
+                              <span className="topic-dot" />
+                              <span>{topic}</span>
+                            </div>
+                          ))}
+                        </div>
 
-                      <div className="today-progress-bar">
-                        <div
-                          className="today-progress-fill"
-                          style={{ width: `${percent}%` }}
-                        />
+                        <div className="today-progress-bar">
+                          <div
+                            className="today-progress-fill"
+                            style={{ width: `${percent}%` }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  }
+                )}
+
+                {todaysPlan.length > 2 && (
+                  <button
+                    className="collapse-btn"
+                    onClick={() => setShowTodayFull(!showTodayFull)}
+                  >
+                    {showTodayFull
+                      ? "Show Less"
+                      : `Show ${todaysPlan.length - 2} More`}
+                  </button>
+                )}
               </div>
             )}
           </section>
 
-          {/* ------- Goals & Deadlines ------- */}
+          {/* ---------------------------------- */}
+          {/* GOALS & DEADLINES */}
+          {/* ---------------------------------- */}
           <section className="dash-card dash-goals">
             <div className="dash-card-header">
               <h2>Goals & Deadlines</h2>
-              <button
-                className="ghost-btn"
-                onClick={() => navigate("/goal")}
-              >
+              <button className="ghost-btn" onClick={() => navigate("/goal")}>
                 Manage Goals
               </button>
             </div>
-            <p className="dash-card-subtitle">
-              Keep an eye on your upcoming deadlines and overall progress.
-            </p>
 
             {loading ? (
-              <p className="loading-text">Loading your goals...</p>
+              <p>Loading...</p>
             ) : goals.length === 0 ? (
-              <p className="empty-text">
-                No goals yet. Click <strong>Manage Goals</strong> to create
-                one.
-              </p>
+              <p>No goals yet.</p>
             ) : (
               <div className="goals-list">
-                {goals.map((goal) => {
-                  // Try to infer progress/status if your API doesn’t have them
+                {(showGoalsFull ? goals : goals.slice(0, 3)).map((goal) => {
                   const progress =
                     typeof goal.progress === "number" ? goal.progress : 0;
+
                   const status =
                     goal.status ||
                     (progress >= 100
@@ -1746,6 +1546,7 @@ export default function Dashboard() {
                           </p>
                         )}
                       </div>
+
                       <div className="goal-meta">
                         <span
                           className={`status-pill status-${status
@@ -1754,12 +1555,14 @@ export default function Dashboard() {
                         >
                           {status}
                         </span>
+
                         <div className="goal-progress">
                           <div
                             className="goal-progress-fill"
                             style={{ width: `${progress}%` }}
                           />
                         </div>
+
                         <span className="goal-progress-text">
                           {progress}%
                         </span>
@@ -1767,21 +1570,32 @@ export default function Dashboard() {
                     </div>
                   );
                 })}
+
+                {goals.length > 3 && (
+                  <button
+                    className="collapse-btn"
+                    onClick={() => setShowGoalsFull(!showGoalsFull)}
+                  >
+                    {showGoalsFull
+                      ? "Show Less"
+                      : `Show ${goals.length - 3} More`}
+                  </button>
+                )}
               </div>
             )}
           </section>
         </main>
 
-        {/* ===== Bottom Row ===== */}
+        {/* ---------------------------------- */}
+        {/* BOTTOM SECTION */}
+        {/* ---------------------------------- */}
         <section className="dash-bottom">
-          {/* ------- Weekly Progress ------- */}
+
+          {/* WEEKLY PROGRESS */}
           <div className="dash-card dash-progress">
             <div className="dash-card-header">
               <h2>Weekly Progress</h2>
             </div>
-            <p className="dash-card-subtitle">
-              You&apos;re building consistency. Keep your streak alive!
-            </p>
 
             <div className="progress-summary">
               <div className="progress-numbers">
@@ -1789,10 +1603,12 @@ export default function Dashboard() {
                   <p className="progress-label">Planned</p>
                   <p className="progress-value">{hoursPlanned} hrs</p>
                 </div>
+
                 <div>
                   <p className="progress-label">Completed</p>
                   <p className="progress-value">{hoursCompleted} hrs</p>
                 </div>
+
                 <div>
                   <p className="progress-label">Completion</p>
                   <p className="progress-value">{weeklyPercent}%</p>
@@ -1808,17 +1624,14 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* ------- AI Study Suggestions ------- */}
+          {/* AI Suggestions */}
           <div className="dash-card dash-ai">
             <div className="dash-card-header">
               <h2>AI Study Suggestions</h2>
               <span className="pill pill-ai">Smart Tips</span>
             </div>
-            <p className="dash-card-subtitle">
-              Powered by your goals and recent activity.
-            </p>
 
-            {parsedAiPlan && parsedAiPlan.length > 0 ? (
+            {parsedAiPlan.length > 0 ? (
               <div className="ai-plan-list">
                 {parsedAiPlan.map((item) => (
                   <div key={item.day} className="ai-day-card">
@@ -1841,6 +1654,7 @@ export default function Dashboard() {
               >
                 {aiLoading ? "Generating..." : "Open AI Planner"}
               </button>
+
               <button
                 className="ghost-btn subtle"
                 onClick={handleGenerateAIPlan}

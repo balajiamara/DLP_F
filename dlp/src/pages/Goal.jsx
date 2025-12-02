@@ -187,9 +187,11 @@ export default function Goal() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        setServerError(
-          data.detail || data.error || "Failed to save the goal."
-        );
+        const message =
+        data.detail || data.error || "The Mentioned Goal Title is already Exists";
+
+      setServerError(message);
+      alert(message); // 👈 show in alert box
         return;
       }
 
@@ -198,12 +200,14 @@ export default function Goal() {
 
       // After save, go to dashboard or goals list
       navigate("/dashboard");
-    } catch (err) {
-      console.error("Goal create error:", err);
-      setServerError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    }catch (err) {
+    console.error("Goal create error:", err);
+    const message = "Something went wrong. Please try again.";
+    setServerError(message);
+    alert(message); // 👈 also show alert on network error
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (
