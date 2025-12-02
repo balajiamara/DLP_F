@@ -318,6 +318,41 @@
   background: linear-gradient(90deg, #22c997, #8ec5ff);
 }
 
+
+/* Blue button */
+.mark-btn {
+  background: #0d6efd;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mark-btn:hover {
+  background: #0b5ed7;
+}
+
+/* Green completed button */
+.completed-btn {
+  background: #198754;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* Align button to right inside plan card */
+.complete-btn-wrapper {
+  text-align: right;
+  margin-top: 8px;
+}
+
+
 /* ====================================================
    Goals Section
    ==================================================== */
@@ -380,6 +415,8 @@
 .collapse-btn:active {
   transform: translateY(0);
 }
+
+
 
 /* ====================================================
    Weekly Progress
