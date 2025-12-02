@@ -5,13 +5,19 @@ import Register from './pages/Register.jsx';
 import Goal from './pages/Goal.jsx';
 import DailyPlan from './pages/DailyPlan.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import logo from '../public/dlp-icon.png';
+import './App.css';
 
 
 
 function App(){
   return(<>
-
-  {/* <p>hi</p> */}
+  <div className="fixed-header">
+    <div className="heading">
+      <img src={logo} alt="" />
+      <h1>Daily Learning Planner</h1>
+    </div>
+  </div>
   <Routes>
      {/* Default route → go to login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
