@@ -75,13 +75,20 @@ export default function DailyPlan() {
     const newErrors = {};
     if (!form.date) newErrors.date = "Date is required";
     if (!form.goal_id) newErrors.goal_id = "Please select a goal";
-    if (!form.topics) newErrors.topics = "Topics are required";
-
+    if (!form.topics) newErrors.topics = "Topics are required"; 
     if (!form.study_hours) {
       newErrors.study_hours = "Study hours is required";
     } else if (isNaN(Number(form.study_hours))) {
       newErrors.study_hours = "Study hours must be a number";
     }
+    if (Number(form.study_hours) > 24) {
+      newErrors.study_hours = "Study hours cannot exceed 24 per day";
+    }
+    const today = new Date().toISOString().split("T")[0];
+    if (form.date < today) {
+      newErrors.date = "You cannot select past dates";
+    }
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -100,7 +107,8 @@ export default function DailyPlan() {
         date: form.date, // "YYYY-MM-DD"
         goal: Number(form.goal_id), // FK id
         topics: form.topics,
-        study_hours: Number(form.study_hours),
+        // study_hours: Number(form.study_hours),
+        planned_hours: Number(form.study_hours),
         is_completed: form.is_completed,
       };
 
@@ -159,6 +167,7 @@ export default function DailyPlan() {
                 id="date"
                 name="date"
                 type="date"
+                min={new Date().toISOString().split("T")[0]}
                 className={`form-input ${errors.date ? "has-error" : ""}`}
                 value={form.date}
                 onChange={handleChange}

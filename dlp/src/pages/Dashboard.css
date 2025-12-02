@@ -199,43 +199,6 @@
   /* background-color: #2b8cd6; */
 }
 
-
-.progress-summary {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.progress-numbers {
-  display: flex;
-  /* background-color: #2b8cd6; */
-  gap: 86px;
-}
-
-.progress-numbers > div {
-  flex: 1;
-  padding: 12px 14px;
-  border-radius: 18px;
-  background: rgba(181, 239, 228, 0.85);
-  border: 1px solid rgba(209, 213, 219, 0.9);
-  box-shadow: 0 6px 14px rgba(148, 163, 184, 0.25);
-}
-
-.progress-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.progress-value {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #111827;
-}
-
-
 /* Special section colors */
 
 .dash-today {
@@ -353,6 +316,60 @@
 }
 
 
+/* TODAY CARD STRUCTURE */
+.today-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Title + hours row */
+.today-title-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+/* Hr styling */
+.today-hours {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+/* Progress row */
+.today-progress-row {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Topic chips */
+.topic-chip {
+  display: inline-block;
+  background: #d4ebf2;
+  color: #049cca;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.99rem;
+  margin-right: 6px;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  border: 1px solid #bfe3ff;
+}
+
+/* Add spacing between each Today card */
+.today-item {
+  padding: 16px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 14px;
+}
+
+
+
 /* ====================================================
    Goals Section
    ==================================================== */
@@ -416,15 +433,89 @@
   transform: translateY(0);
 }
 
+.goals-list .goal-item {
+  margin-bottom: 20px !important;
+  padding: 18px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+}
 
 
 /* ====================================================
    Weekly Progress
    ==================================================== */
 
+/* .progress-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.progress-numbers {
+  display: flex;
+  gap: 86px;
+}
+
+.progress-numbers > div {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(181, 239, 228, 0.85);
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  box-shadow: 0 6px 14px rgba(148, 163, 184, 0.25);
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
 .progress-value {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  color: #111827;
+} */
+
+.progress-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Flex row on large screens */
+.progress-numbers {
+  display: flex;
+  gap: 40px;
+}
+
+/* Individual cards */
+.progress-numbers > div {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(181, 239, 228, 0.85);
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  box-shadow: 0 6px 14px rgba(148, 163, 184, 0.25);
+  text-align: center;
+}
+
+/* Labels & values */
+.progress-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.progress-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
 }
 
 /* ====================================================
@@ -516,6 +607,15 @@
     width: 100%;
     min-width: unset;
   }
+
+  /* FIXED — now inside correct media query */
+  .progress-numbers {
+    gap: 20px;
+  }
+
+  .progress-numbers > div {
+    padding: 10px 12px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -525,5 +625,25 @@
 
   .dash-greeting-title {
     font-size: 2.2rem;
+  }
+
+  /* Stack vertically on mobile */
+  .progress-numbers {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .progress-numbers > div {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .progress-label {
+    font-size: 0.75rem;
+  }
+
+  .progress-value {
+    font-size: 1.15rem;
   }
 }

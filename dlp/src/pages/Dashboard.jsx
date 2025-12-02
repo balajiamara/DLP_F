@@ -45,6 +45,27 @@ export default function Dashboard() {
       return;
     }
 
+    const sortDailyPlans = (plans) => {
+  return plans.sort((a, b) => {
+    // 1) UNCOMPLETED FIRST
+    if (a.is_completed !== b.is_completed) {
+      return a.is_completed ? 1 : -1; 
+    }
+
+    // 2) Newest-by-date (or id if backend sends same date)
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    if (dateA.getTime() !== dateB.getTime()) {
+      return dateB - dateA; // Newest first
+    }
+
+    // 3) If same day → newest ID first
+    return b.id - a.id;
+  });
+};
+
+
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -72,7 +93,10 @@ export default function Dashboard() {
         const plansData = await plansRes.json().catch(() => []);
 
         setGoals(Array.isArray(goalsData) ? goalsData : []);
-        setDailyPlans(Array.isArray(plansData) ? plansData : []);
+        // setDailyPlans(Array.isArray(plansData) ? plansData : []);
+        setDailyPlans(
+          Array.isArray(plansData) ? sortDailyPlans(plansData) : []
+        );
       } catch (err) {
         console.error("Dashboard data error:", err);
         setError("Something went wrong while loading data.");
@@ -134,11 +158,40 @@ export default function Dashboard() {
     }
 
     // Update local UI instantly
+    // setDailyPlans((prev) =>
+    //   prev.map((dp) =>
+    //     dp.id === id ? { ...dp, is_completed: true } : dp
+    //   )
+    // );
+
+const sortDailyPlans = (plans) => {
+  return plans.sort((a, b) => {
+    // 1) UNCOMPLETED FIRST
+    if (a.is_completed !== b.is_completed) {
+      return a.is_completed ? 1 : -1; 
+    }
+
+    // 2) Newest-by-date (or id if backend sends same date)
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    if (dateA.getTime() !== dateB.getTime()) {
+      return dateB - dateA; // Newest first
+    }
+
+    // 3) If same day → newest ID first
+    return b.id - a.id;
+  });
+};
+
+
     setDailyPlans((prev) =>
-      prev.map((dp) =>
-        dp.id === id ? { ...dp, is_completed: true } : dp
-      )
-    );
+        sortDailyPlans(
+          prev.map((dp) =>
+            dp.id === id ? { ...dp, is_completed: true } : dp
+          )
+        )
+      );
   } catch (error) {
     console.error("Error completing plan:", error);
   }
@@ -346,7 +399,7 @@ export default function Dashboard() {
 
                     return (
                       <div key={plan.id} className="today-item">
-                        <div className="today-item-header">
+                        {/* <div className="today-item-header">
                           <div className="today-item-goal">
                             <span className="today-goal-pill">
                               {plan.goalTitle}
@@ -358,16 +411,35 @@ export default function Dashboard() {
                           <span className="today-progress-label">
                             {plan.completed}/{plan.totalTopics} done
                           </span>
+                        </div> */}
+
+                        <div className="today-info">
+                        <div className="today-title-row">
+                          <span className="today-goal-name">{plan.goalTitle}</span>
+                          <span className="today-hours">{plan.plannedHours} hrs</span>
                         </div>
 
-                        <div className="today-topics">
+                        <div className="today-progress-row">
+                          <span className="today-progress-status">
+                            {plan.completed}/{plan.totalTopics} done
+                          </span>
+                        </div>
+
+                        <div className="today-topic-row">
+                          {plan.topics.map((topic, idx) => (
+                            <span key={idx} className="topic-chip">{topic}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                        {/* <div className="today-topics">
                           {plan.topics.map((topic, idx) => (
                             <div key={idx} className="topic-pill">
                               <span className="topic-dot" />
                               <span>{topic}</span>
                             </div>
                           ))}
-                        </div>
+                        </div> */}
 
                         <div className="today-progress-bar">
                           <div
